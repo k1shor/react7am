@@ -1,8 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { isAuthenticated, signOut } from '../../API/userAPI'
 import './navbar.css'
 
 const Navbar = () => {
+    const { user } = isAuthenticated()
+    const navigate = useNavigate()
+
+    const signout = () => {
+        signOut()
+        .then(data=>{
+            console.log(data.message)
+            navigate('/')
+
+        })
+    }
+
     return (
         <>
             <div className='row pt-1 bg-dark'>
@@ -16,9 +29,39 @@ const Navbar = () => {
                     </form>
                 </div>
                 <div className='col-md-3 d-flex justify-content-evenly'>
-                    <Link to='/signin'><i class="bi bi-box-arrow-in-right fs-3 fw-bold text-white"></i></Link>
-                    <Link to='/signup'><i class="bi bi-person-plus fs-3 fw-bold text-white"></i></Link>
+                    {!user &&
+                        <>
+                            <Link to='/signin'><i class="bi bi-box-arrow-in-right fs-3 fw-bold text-white"></i></Link>
+                            <Link to='/signup'><i class="bi bi-person-plus fs-3 fw-bold text-white"></i></Link>
+                        </>
+                    }
+
+                    {
+                        (!user || (user && user.role === 0)) &&
                     <Link to='/cart'><i class="bi bi-cart fs-3 fw-bold text-white"></i></Link>
+                    }
+                    {
+                        user && user.role ===0 &&
+                        <>
+                        <Link to =''><i class="bi bi-person-circle fs-3 fw-bold text-white"></i>
+                        </Link></>
+                    }
+                    {
+                        user && user.role ===1 &&
+                        <>
+                        <Link to =''>
+                        <i class="bi bi-speedometer fs-3 fw-bold text-white"></i>
+                        </Link>
+                        </>
+                    }
+                    {
+                        user &&
+                        <Link to = ''>
+                        <i class="bi bi-box-arrow-right fs-3 fw-bold text-white"
+                        onClick={signout}
+                        ></i></Link>
+
+                    }
 
                 </div>
             </div>

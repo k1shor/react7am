@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { userRegister } from '../../API/userAPI'
 import Footer from '../layout/Footer'
 import Navbar from '../layout/Navbar'
 
@@ -13,10 +14,41 @@ const Signup = () => {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
+  const clickSubmit = (event) => {
+    event.preventDefault()
+    userRegister(name, email, password)
+    .then(data=>{
+      if(data.error){
+        setError(data.error)
+        setSuccess('')
+      }
+      else{
+        setSuccess("User registered successfully. Verify to continue.")
+        setError('')
+        setName('')
+        setEmail('')
+        setPassword('')
+      }
+    })
+    .catch(error=>console.log(error))
+  }
+
+  const showError =() =>{
+    if(error){
+      return <div className='alert alert-danger'>{error}</div>
+    }
+  }
+  const showSuccess = () => {
+    if(success){
+      return <div className='alert alert-success'>{success}</div>
+    }
+  }
 
   return (
     <>
       <Navbar />
+      {showError()}
+      {showSuccess()}
 
       <main className="form-signin w-50 mx-auto my-5 shadow-lg p-5">
         <form>
@@ -24,7 +56,7 @@ const Signup = () => {
           <h1 className="h3 mb-3 fw-normal">Register</h1>
 
           <div className="form-floating mb-2">
-            <input type="text" className="form-control" id="firstname" placeholder="enter name here" onChange={event=>setName(event.target.value)}/>
+            <input type="text" className="form-control" id="firstname" placeholder="enter name here" onChange={event=>setName(event.target.value)} value={name}/>
             <label for="firstname">Name</label>
           </div>
           {/* <div className="form-floating mb-2">
@@ -68,11 +100,11 @@ const Signup = () => {
 
 
           <div className="form-floating mb-2">
-            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={e=>setEmail(e.target.value)}/>
+            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={e=>setEmail(e.target.value)} value={email}/>
             <label for="floatingInput">Email address</label>
           </div>
           <div className="form-floating mb-2">
-            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e=>setPassword(e.target.value)} />
+            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e=>setPassword(e.target.value)} value={password}/>
             <label for="floatingPassword">Password</label>
           </div>
           {/* <div className="form-floating mb-2">
