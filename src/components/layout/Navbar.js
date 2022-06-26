@@ -49,7 +49,7 @@ const Navbar = () => {
                     {
                         user && user.role ===1 &&
                         <>
-                        <Link to =''>
+                        <Link to ='/admin/dashboard'>
                         <i class="bi bi-speedometer fs-3 fw-bold text-white"></i>
                         </Link>
                         </>

@@ -14,6 +14,11 @@ import AdminDashboard from './components/pages/AdminDashboard'
 import AdminRoute from './route/AdminRoute'
 import PrivateRoute from './route/PrivateRoute'
 import ViewCategories from './components/pages/ViewCategories'
+import AddCategory from './components/pages/AddCategory'
+import EditCategory from './components/pages/EditCategory'
+import ProductsAdmin from './components/pages/ProductsAdmin'
+import AddProduct from './components/pages/AddProduct'
+import ProductDetails from './components/pages/ProductDetails'
 
 const MyRoutes = () => {
   return (
@@ -38,12 +43,21 @@ const MyRoutes = () => {
         <Route path='/blogs' element={<Blogs />} />
         <Route path='/contact' element={<Contact />} />
 
+        <Route path='/product/:id' element={<ProductDetails/>}/>
+
         <Route path='/' element={<AdminRoute />}>
           <Route path='/admin/dashboard' element={<AdminDashboard />} />
-          <Route path= '/categories' element={<ViewCategories/>}/>
+          <Route path='/categories' element={<ViewCategories />} />
+          <Route path='/category/add' element={<AddCategory />} />
+          <Route path='/category/update/:category_id' element={<EditCategory />} />
+          <Route path='/admin/products' element={<ProductsAdmin />} />
+          <Route path='/admin/product/add' element={<AddProduct/>}/>
+
         </Route>
-        <Route path='/' element={<PrivateRoute/>}>
-          <Route path='/user/profile' element={<Cart/>}/>
+
+
+        <Route path='/' element={<PrivateRoute />}>
+          <Route path='/user/profile/' element={<Cart />} />
         </Route>
 
       </Routes>
