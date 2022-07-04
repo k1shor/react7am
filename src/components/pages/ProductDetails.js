@@ -5,6 +5,10 @@ import { isAuthenticated } from '../../API/userAPI'
 import Footer from '../layout/Footer'
 import Navbar from '../layout/Navbar'
 import Products from '../Products'
+import { useDispatch } from 'react-redux'
+import { addItemToCart } from '../../redux/actions/cartActions'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetails = () => {
     const { user } = isAuthenticated()
@@ -14,6 +18,8 @@ const ProductDetails = () => {
 
     const [product, setProduct] = useState({})
     const [relatedProduct, setRelatedProduct] = useState([])
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         findProduct(id)
@@ -38,8 +44,14 @@ const ProductDetails = () => {
             .catch(err => console.log(err))
     }, [params])
 
+    const addToCart = () => {
+        dispatch(addItemToCart(id, 1))
+        toast.success('item added to cart')
+    }
+
     return (
         <>
+        <ToastContainer theme='colored' position='top-right'/>
             <Navbar />
             <div className='container my-5 p-5 d-flex mx-auto shadow-lg'>
                 <div className='img-container w-50'>
@@ -54,7 +66,7 @@ const ProductDetails = () => {
                         (user && user.role === 1) ?
                             <button className='btn btn-warning'>Update Product</button>
                             :
-                            <button className='btn btn-warning'>Add to Cart</button>
+                            <button className='btn btn-warning' onClick={addToCart}>Add to Cart</button>
                     }
 
                 </div>

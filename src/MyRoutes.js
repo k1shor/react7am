@@ -19,6 +19,9 @@ import EditCategory from './components/pages/EditCategory'
 import ProductsAdmin from './components/pages/ProductsAdmin'
 import AddProduct from './components/pages/AddProduct'
 import ProductDetails from './components/pages/ProductDetails'
+import ConfirmOrder from './components/pages/ConfirmOrder'
+import Shipping from './components/pages/Shipping'
+import PaymentElement from './components/pages/PaymentElement'
 
 const MyRoutes = () => {
   return (
@@ -58,6 +61,9 @@ const MyRoutes = () => {
 
         <Route path='/' element={<PrivateRoute />}>
           <Route path='/user/profile/' element={<Cart />} />
+          <Route path = '/confirmorder' element={<ConfirmOrder/>}/>
+          <Route path='/shipping' element={<Shipping/>}/>
+          <Route path='/payment' element={<PaymentElement/>}/>
         </Route>
 
       </Routes>
