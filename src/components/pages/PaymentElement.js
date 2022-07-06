@@ -3,6 +3,7 @@ import { API } from '../../config'
 import Payment from './Payment'
 import {Elements} from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import Payment2 from './Payment2'
 
 const PaymentElement = () => {
     const [stripeApiKey, setStripeApiKey] = useState('')
@@ -19,6 +20,7 @@ const PaymentElement = () => {
 
   return (
     <Elements stripe={loadStripe(stripeApiKey)}>
+    {/* <Payment2/> */}
     <Payment/>
     </Elements>
   )

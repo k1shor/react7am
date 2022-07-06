@@ -22,6 +22,8 @@ import ProductDetails from './components/pages/ProductDetails'
 import ConfirmOrder from './components/pages/ConfirmOrder'
 import Shipping from './components/pages/Shipping'
 import PaymentElement from './components/pages/PaymentElement'
+import PaymentForm from './components/pages/PaymentForm'
+import UserProfile from './components/pages/UserProfile'
 
 const MyRoutes = () => {
   return (
@@ -58,12 +60,13 @@ const MyRoutes = () => {
 
         </Route>
 
+<Route path='/paymentformtest' element={<PaymentForm/>}/>
 
         <Route path='/' element={<PrivateRoute />}>
-          <Route path='/user/profile/' element={<Cart />} />
           <Route path = '/confirmorder' element={<ConfirmOrder/>}/>
           <Route path='/shipping' element={<Shipping/>}/>
           <Route path='/payment' element={<PaymentElement/>}/>
+          <Route path='/user/profile' element={<UserProfile/>}/>
         </Route>
 
       </Routes>

@@ -43,7 +43,7 @@ const Navbar = () => {
                     {
                         user && user.role ===0 &&
                         <>
-                        <Link to =''><i class="bi bi-person-circle fs-3 fw-bold text-white"></i>
+                        <Link to ='/user/profile'><i class="bi bi-person-circle fs-3 fw-bold text-white"></i>
                         </Link></>
                     }
                     {

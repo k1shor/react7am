@@ -1,11 +1,12 @@
 import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { isAuthenticated } from '../../API/userAPI'
 import { API } from '../../config'
+import { createOrder } from '../../redux/actions/orderActions'
 import CheckoutProgress from '../CheckoutProgress'
 import Footer from '../layout/Footer'
 import Navbar from '../layout/Navbar'
@@ -18,6 +19,8 @@ const Payment = () => {
     const stripe = useStripe()
     const elements = useElements()
     let {user, token} = isAuthenticated()
+
+    const dispatch = useDispatch()
 
     let options = {
         style: {
@@ -43,6 +46,7 @@ const Payment = () => {
         alternate_shipping_address: shipping_info.alternate_shipping_address,
         city: shipping_info.city,
         country: shipping_info.country,
+        phone: shipping_info.phone
         // totalOrderPrice: totalPrice
     }
 
@@ -93,6 +97,7 @@ const Payment = () => {
                     localStorage.removeItem('cartItems')
                     document.querySelector('#pay-btn').disabled = true
                     // place order
+                    dispatch(createOrder(order))
                     toast.success("Your order has been placed")
                 }
             }
