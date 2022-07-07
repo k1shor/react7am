@@ -24,14 +24,23 @@ const Payment = () => {
 
     let options = {
         style: {
-            base: {
-                fontSize: '16px'
-                        },
+            fontWeight: 400,
+        fontFamily: 'futurabold',
+        fontSize: '16px',
+        lineHeight: '1.4',
+        display: 'flex',
+        color: '#555',
+        backgroundColor: '#fff',
+        '::placeholder': {
+            color: '#888',
+            fontFamily: 'futurabold',
+        },
             invalid: {
                 color: '#ff0000'
             }
         }
     }
+    
 
     useEffect(() => {
         let price_array = cart_items.map(item => { return item.quantity * item.price })
@@ -56,7 +65,7 @@ const Payment = () => {
 
     const paymentHandle = async (event) => {
         event.preventDefault()
-        document.getElementById('pay-btn').disabled = true
+        document.querySelector('#pay-btn').disabled = true
 
         let response
         try{
@@ -112,7 +121,7 @@ const Payment = () => {
     return (
         <>
             <>
-            <ToastContainer/>
+            <ToastContainer theme='colored' position='top-right'/>
                 <Navbar />
                 <div className='row d-flex  justify-content-evenly'>
                     <div className='order-details col-md-8'>
@@ -189,7 +198,7 @@ const Payment = () => {
                         <h4>Card Information</h4>
                         <hr />
                         <label htmlFor='card_number'>Card Number:</label>
-                        <CardNumberElement type='text' className='form-control' id='card_number' options={options} />
+                        <CardNumberElement className='form-control' id='card_number' options={options} />
                         <label htmlFor='card-expiry'>Valid Upto:</label>
                         <CardExpiryElement type='text' className='form-control' id='card-expiry' options={options} />
                         <label htmlFor='card-cvc'>CVC:</label>

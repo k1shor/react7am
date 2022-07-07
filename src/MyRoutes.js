@@ -24,6 +24,7 @@ import Shipping from './components/pages/Shipping'
 import PaymentElement from './components/pages/PaymentElement'
 import PaymentForm from './components/pages/PaymentForm'
 import UserProfile from './components/pages/UserProfile'
+import UserOrderDetail from './components/pages/UserOrderDetail'
 
 const MyRoutes = () => {
   return (
@@ -67,6 +68,7 @@ const MyRoutes = () => {
           <Route path='/shipping' element={<Shipping/>}/>
           <Route path='/payment' element={<PaymentElement/>}/>
           <Route path='/user/profile' element={<UserProfile/>}/>
+          <Route path = '/orderdetails/:order_id' element={<UserOrderDetail/>}/>
         </Route>
 
       </Routes>

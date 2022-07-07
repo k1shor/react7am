@@ -29,9 +29,17 @@ const Payment = () => {
 //     }
     const options = {
         style: {
-            base: {
-                fontSize: '16px'
-            },
+            fontWeight: 400,
+        fontFamily: 'futurabold',
+        fontSize: '16px',
+        lineHeight: '1.4',
+        display: 'flex',
+        color: '#555',
+        backgroundColor: '#fff',
+        '::placeholder': {
+            color: '#888',
+            fontFamily: 'futurabold',
+        },
             invalid: {
                 color: '#ff0000'
             }
